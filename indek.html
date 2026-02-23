@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazing Thailand Travel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --navy: #0a2342;
+      --teal: #0d7377;
+      --gold: #f4c430;
+      --orange: #e8813a;
+      --cream: #faf8f3;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --shadow: 0 8px 32px rgba(10,35,66,0.12);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans Thai', sans-serif; background: var(--cream); color: var(--navy); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ===== STICKY NAV — Plus One #1 ===== */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,35,66,0.97);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 66px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; color: var(--gold); letter-spacing: 1px;
+    }
+    .nav-logo span { color: var(--white); font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); font-size: 0.92rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 25px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+    /* ===== SECTION 1: HERO BANNER ===== */
+    .hero {
+      position: relative; height: 92vh; min-height: 520px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80');
+      background-size: cover; background-position: center;
+      animation: slowZoom 20s ease infinite alternate;
+    }
+    @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,35,66,0.55) 0%, rgba(10,35,66,0.7) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; animation: fadeUp 1s ease; }
+    .hero-tag {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.82); max-width: 560px;
+      margin: 0 auto 2rem; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 0.85rem 2rem; border-radius: 50px; font-family: 'IBM Plex Sans Thai', sans-serif;
+      font-size: 1rem; font-weight: 600; cursor: pointer; border: 2px solid transparent;
+      transition: all 0.3s; display: inline-block;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: transparent; border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border-color: rgba(255,255,255,0.6); color: var(--white); }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    /* ===== SECTION 2: HEADING & DESCRIPTION ===== */
+    .about-section { padding: 90px 5%; background: var(--cream); }
+    .section-header { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy); margin-bottom: 1rem; line-height: 1.2;
+    }
+    .divider { width: 64px; height: 4px; background: var(--gold); border-radius: 2px; margin: 1rem auto; }
+    .section-header p { font-size: 1.05rem; color: var(--gray); line-height: 1.85; }
+
+    .stats-row { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 20px; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--teal); font-weight: 700; }
+    .stat-label { font-size: 0.9rem; color: var(--gray); margin-top: 4px; }
+
+    /* ===== SECTION 3: GALLERY ===== */
+    .gallery-section { background: var(--navy); padding: 80px 5%; }
+    .gallery-section .section-header h2 { color: var(--white); }
+    .gallery-section .section-header p { color: rgba(255,255,255,0.6); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 12px; max-width: 1200px; margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative; border-radius: 12px; overflow: hidden;
+      cursor: pointer;
+    }
+    /* Spanning items for visual interest */
+    .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+
+    .gallery-item img { transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,35,66,0.88) 0%, transparent 100%);
+      padding: 1.5rem 1.2rem 1rem;
+      opacity: 0; transition: opacity 0.4s ease;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+    .gallery-caption h3 { color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
+    .gallery-caption p { color: rgba(255,255,255,0.75); font-size: 0.82rem; }
+
+    /* ===== SECTION 4: CARDS ===== */
+    .cards-section { padding: 80px 5%; background: var(--cream); }
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .card {
+      background: var(--white); border-radius: 18px; overflow: hidden;
+      box-shadow: var(--shadow); transition: transform 0.35s, box-shadow 0.35s;
+      display: flex; flex-direction: column;
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(10,35,66,0.15); }
+    .card-img { height: 200px; overflow: hidden; position: relative; }
+    .card-img img { transition: transform 0.5s; }
+    .card:hover .card-img img { transform: scale(1.06); }
+    .card-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--gold); color: var(--navy);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      padding: 0.25rem 0.8rem; border-radius: 50px;
+    }
+    .card-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .card-location { font-size: 0.82rem; color: var(--teal); font-weight: 600; margin-bottom: 0.7rem; }
+    .card-body p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
+    .card-btn {
+      align-self: flex-start; background: var(--navy); color: var(--white);
+      padding: 0.55rem 1.3rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+      transition: background 0.3s;
+    }
+    .card-btn:hover { background: var(--teal); }
+
+    /* ===== SECTION 5: FOOTER ===== */
+    footer { background: #060f1e; color: rgba(255,255,255,0.7); padding: 60px 5% 28px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; max-width: 1200px; margin: 0 auto 48px;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); display: block; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.75; max-width: 300px; }
+    .footer-col h4 { color: var(--gold); font-size: 0.78rem; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.65rem; font-size: 0.9rem; }
+    .footer-col a { color: rgba(255,255,255,0.65); transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .social-row { display: flex; gap: 10px; margin-top: 1.2rem; }
+    .social-row a {
+      width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: rgba(255,255,255,0.7); transition: all 0.3s;
+    }
+    .social-row a:hover { border-color: var(--gold); color: var(--gold); background: rgba(244,196,48,0.08); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px; text-align: center; font-size: 0.85rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    
+    #backToTop {
+      position: fixed; bottom: 28px; right: 28px; z-index: 99;
+      width: 50px; height: 50px; background: var(--gold); color: var(--navy);
+      border: none; border-radius: 50%; font-size: 1.4rem; font-weight: 700;
+      cursor: pointer; display: none; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: all 0.3s;
+    }
+    #backToTop:hover { transform: translateY(-4px) scale(1.05); background: #ffd000; }
+    #backToTop.show { display: flex; }
+
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    
+    @media (max-width: 1024px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+      .gallery-item:first-child { grid-column: span 2; grid-row: span 1; height: 260px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    
+    @media (max-width: 640px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 66px; left: 0; right: 0; background: rgba(10,35,66,0.97); padding: 1.2rem 2rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-column: 1 / -1; height: 220px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .stats-row { gap: 30px; }
+      about-section, .cards-section, .gallery-section { padding: 60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <nav id="navbar">
+    <div class="nav-logo">Amazing <span>Thailand</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">เกี่ยวกับ</a></li>
+      <li><a href="#gallery">แกลเลอรี่</a></li>
+      <li><a href="#destinations">สถานที่</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">✈ ยินดีต้อนรับ</span>
+      <h1>ค้นพบความงาม<br>ของ <em>ประเทศไทย</em></h1>
+      <p>ดินแดนแห่งรอยยิ้ม — จากหาดทรายขาวใต้ ถึงวัดงามเหนือ ทุกมุมของไทยคือความทรงจำที่ไม่มีวันลืม</p>
+      <div class="hero-btns">
+        <a href="#destinations" class="btn btn-gold">สำรวจสถานที่</a>
+        <a href="#gallery" class="btn btn-outline">ชมแกลเลอรี่</a>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section class="about-section" id="about">
+    <div class="section-header">
+      <h2>ทำไมต้องเที่ยวไทย?</h2>
+      <div class="divider"></div>
+      <p>ประเทศไทยมอบทุกอย่างที่นักท่องเที่ยวต้องการ ไม่ว่าจะเป็นธรรมชาติสวยงาม วัฒนธรรมที่ลึกซึ้ง อาหารรสเลิศ และผู้คนที่อบอุ่นเป็นมิตร ทำให้ไทยติดอันดับจุดหมายปลายทางยอดนิยมของโลกมาหลายสิบปี</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">77</div><div class="stat-label">จังหวัด</div></div>
+      <div class="stat"><div class="stat-num">1,448</div><div class="stat-label">เกาะทั่วประเทศ</div></div>
+      <div class="stat"><div class="stat-num">40M+</div><div class="stat-label">นักท่องเที่ยว/ปี</div></div>
+      <div class="stat"><div class="stat-num">5★</div><div class="stat-label">ความเป็นมิตร</div></div>
+    </div>
+  </section>
+
+  
+  <section class="gallery-section" id="gallery">
+    <div class="section-header">
+      <h2>แกลเลอรี่ความงดงาม</h2>
+      <div class="divider"></div>
+      <p>ภาพมุมต่างๆ ของประเทศไทย ที่รอให้คุณไปสัมผัส</p>
+    </div>
+    <div class="gallery-grid">
+      
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80" alt="Phi Phi Island" loading="lazy" />
+        <div class="gallery-caption">
+          <h3>หมู่เกาะพีพี</h3>
+          <p>กระบี่, ประเทศไทย</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=600&q=80" alt="Chiang Mai Temple" loading="lazy" />
+        <div class="gallery-caption">
+          <h3>วัดพระธาตุดอยสุเทพ</h3>
+          <p>เชียงใหม่</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=600&q=80" alt="Bangkok Temple" loading="lazy" />
+        <div class="gallery-caption">
+          <h3>วัดอรุณ</h3>
+          <p>กรุงเทพมหานคร</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&q=80" alt="Phuket Beach" loading="lazy" />
+        <div class="gallery-caption">
+          <h3>หาดป่าตอง</h3>
+          <p>ภูเก็ต</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1490077476659-095159692ab5?w=600&q=80" alt="Thai Food" loading="lazy" />
+        <div class="gallery-caption">
+          <h3>อาหารไทย</h3>
+          <p>รสชาติที่โลกตกหลุมรัก</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section class="cards-section" id="destinations">
+    <div class="section-header">
+      <h2>สถานที่แนะนำ</h2>
+      <div class="divider"></div>
+      <p>เลือกจุดหมายที่ใช่สำหรับการเดินทางครั้งต่อไปของคุณ</p>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80" alt="Bangkok" loading="lazy" />
+          <span class="card-badge">เมืองหลวง</span>
+        </div>
+        <div class="card-body">
+          <h3>กรุงเทพมหานคร</h3>
+          <div class="card-location">📍 ภาคกลาง</div>
+          <p>เมืองที่ไม่เคยหลับ เต็มไปด้วยวัดโบราณ ตลาดนัด ห้างสรรพสินค้า และอาหารริมทางที่อร่อยที่สุดในโลก</p>
+          <a href="#" class="card-btn">ดูเพิ่มเติม →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&q=80" alt="Chiang Mai" loading="lazy" />
+          <span class="card-badge">ธรรมชาติ</span>
+        </div>
+        <div class="card-body">
+          <h3>เชียงใหม่</h3>
+          <div class="card-location">📍 ภาคเหนือ</div>
+          <p>เมืองโบราณล้านนา ห้อมล้อมด้วยภูเขาและหมอก แหล่งท่องเที่ยวเชิงนิเวศและวัฒนธรรมยอดนิยม</p>
+          <a href="#" class="card-btn">ดูเพิ่มเติม →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=600&q=80" alt="Phuket" loading="lazy" />
+          <span class="card-badge">ทะเล</span>
+        </div>
+        <div class="card-body">
+          <h3>ภูเก็ต</h3>
+          <div class="card-location">📍 ภาคใต้ฝั่งอันดามัน</div>
+          <p>เกาะที่ใหญ่ที่สุดของไทย มีทั้งหาดทรายขาวสวยงาม น้ำทะเลใสเขียว และ Nightlife ที่คึกคัก</p>
+          <a href="#" class="card-btn">ดูเพิ่มเติม →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1552550049-db097c9480d1?w=600&q=80" alt="Ayutthaya" loading="lazy" />
+          <span class="card-badge">ประวัติศาสตร์</span>
+        </div>
+        <div class="card-body">
+          <h3>อยุธยา</h3>
+          <div class="card-location">📍 ภาคกลาง</div>
+          <p>อดีตราชธานีของไทย มรดกโลก UNESCO เต็มไปด้วยโบราณสถานและพระพุทธรูปโบราณ</p>
+          <a href="#" class="card-btn">ดูเพิ่มเติม →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+ 
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Amazing Thailand ✈</span>
+        <p>ค้นพบความมหัศจรรย์ของประเทศไทย ดินแดนแห่งรอยยิ้ม วัฒนธรรม และธรรมชาติที่งดงามไม่มีที่เปรียบ</p>
+        <div class="social-row">
+          <a href="#">ig</a>
+          <a href="#">fb</a>
+          <a href="#">yt</a>
+          <a href="#">tw</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>เมนูนำทาง</h4>
+        <ul>
+          <li><a href="#about">เกี่ยวกับเรา</a></li>
+          <li><a href="#gallery">แกลเลอรี่</a></li>
+          <li><a href="#destinations">สถานที่ท่องเที่ยว</a></li>
+          <li><a href="#contact">ติดต่อเรา</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>ข้อมูลติดต่อ</h4>
+        <ul>
+          <li>📍 กรุงเทพมหานคร 10110</li>
+          <li>📞 02-xxx-xxxx</li>
+          <li>✉️ info@amazingthailand.th</li>
+          <li>🌐 www.amazingthailand.th</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>จัดทำโดย 68051456 ชัยสิทธิ์ นิลศรี    </p>
+    </div>
+  </footer>
+
+  
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="กลับขึ้นบน">↑</button>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      btn.classList.toggle('show', window.scrollY > 400);
+    });
+  </script>
+</body>
+</html>
